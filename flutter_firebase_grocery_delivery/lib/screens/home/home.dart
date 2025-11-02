@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_firebase_grocery_delivery/screens/detail_page.dart';
 
-// --- Colors & Styles ---
-// Custom primary green color derived from the images
+// --- App Colors ---
 const Color kPrimaryGreen = Color(0xFF6AA84F);
-
-// Custom light gray for text fields and backgrounds
 const Color kLightGrey = Color(0xFFF3F3F3);
 
-// Main Screen
+// --- Home Screen ---
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
@@ -15,37 +13,29 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      // No AppBar, as the content starts right from the top (under the status bar)
       body: SafeArea(
         child: SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              // 1. Header (Welcome and User Name)
-              const Padding(
+            children: const [
+              Padding(
                 padding: EdgeInsets.fromLTRB(24, 20, 24, 0),
                 child: _HomeHeader(),
               ),
-
-              // 2. Search Bar
-              const Padding(
+              Padding(
                 padding: EdgeInsets.symmetric(horizontal: 24, vertical: 20),
                 child: _SearchBar(),
               ),
-
-              // 3. Discount Banner Carousel
-              const Padding(
+              Padding(
                 padding: EdgeInsets.symmetric(horizontal: 24),
                 child: _DiscountBanner(),
               ),
-
-              const SizedBox(height: 30),
-
-              // 4. Categories Section Title
-              const Padding(
+              SizedBox(height: 30),
+              Padding(
                 padding: EdgeInsets.symmetric(horizontal: 24),
                 child: Text(
-                  'Catagories', // Note: Retaining the misspelling "Catagories" from the image for accuracy
+                  'Categories',
                   style: TextStyle(
                     fontFamily: 'Poppins',
                     fontWeight: FontWeight.w600,
@@ -54,16 +44,10 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ),
               ),
-
-              const SizedBox(height: 15),
-
-              // 5. Category List (Horizontal Scroll)
-              const _CategoryList(),
-
-              const SizedBox(height: 30),
-
-              // 6. Popular Items Section Title
-              const Padding(
+              SizedBox(height: 15),
+              _CategoryList(),
+              SizedBox(height: 30),
+              Padding(
                 padding: EdgeInsets.symmetric(horizontal: 24),
                 child: Text(
                   'Popular Fruits',
@@ -75,15 +59,12 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ),
               ),
-
-              const SizedBox(height: 15),
-
-              // 7. Popular Items Grid
-              const Padding(
+              SizedBox(height: 15),
+              Padding(
                 padding: EdgeInsets.symmetric(horizontal: 24),
                 child: _PopularItemsGrid(),
               ),
-              const SizedBox(height: 30),
+              SizedBox(height: 30),
             ],
           ),
         ),
@@ -92,7 +73,7 @@ class HomeScreen extends StatelessWidget {
   }
 }
 
-// --- 1. Header Widget ---
+// --- 1. Header ---
 class _HomeHeader extends StatelessWidget {
   const _HomeHeader();
 
@@ -101,7 +82,6 @@ class _HomeHeader extends StatelessWidget {
     return const Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // "Welcome"
         Text(
           'Welcome',
           style: TextStyle(
@@ -110,9 +90,8 @@ class _HomeHeader extends StatelessWidget {
             color: Colors.black,
           ),
         ),
-        // User Name
         Text(
-          'Chris Vaz', // Placeholder name
+          'Chris Vaz',
           style: TextStyle(
             fontFamily: 'Poppins',
             fontWeight: FontWeight.w700,
@@ -125,7 +104,7 @@ class _HomeHeader extends StatelessWidget {
   }
 }
 
-// --- 2. Search Bar Widget ---
+// --- 2. Search Bar ---
 class _SearchBar extends StatelessWidget {
   const _SearchBar();
 
@@ -135,7 +114,7 @@ class _SearchBar extends StatelessWidget {
       height: 50,
       decoration: BoxDecoration(
         color: kLightGrey,
-        borderRadius: BorderRadius.circular(15), // Slightly rounded corners
+        borderRadius: BorderRadius.circular(15),
       ),
       child: Row(
         children: [
@@ -157,7 +136,6 @@ class _SearchBar extends StatelessWidget {
               style: TextStyle(fontFamily: 'Poppins'),
             ),
           ),
-          // Search Icon Button
           Container(
             width: 50,
             height: 50,
@@ -173,20 +151,18 @@ class _SearchBar extends StatelessWidget {
   }
 }
 
-// --- 3. Discount Banner Widget ---
+// --- 3. Discount Banner ---
 class _DiscountBanner extends StatelessWidget {
   const _DiscountBanner();
 
   @override
   Widget build(BuildContext context) {
-    // The banner background is a large green rounded rectangle
     return Container(
       height: 150,
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
         color: kPrimaryGreen,
         borderRadius: BorderRadius.circular(25),
-        // Subtle shadow to mimic the image's look
         boxShadow: [
           BoxShadow(
             color: kPrimaryGreen.withOpacity(0.3),
@@ -197,9 +173,8 @@ class _DiscountBanner extends StatelessWidget {
         ],
       ),
       child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Left side: Text content
+          // Left text
           Expanded(
             flex: 4,
             child: Column(
@@ -217,7 +192,7 @@ class _DiscountBanner extends StatelessWidget {
                 ),
                 const SizedBox(height: 5),
                 Text(
-                  'Lorem ipsum dolor sit amet, consectetur',
+                  'Fresh deals every day!',
                   style: TextStyle(
                     fontFamily: 'Poppins',
                     fontSize: 10,
@@ -225,7 +200,6 @@ class _DiscountBanner extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 10),
-                // Shop Now Button (looks like a secondary button in the image)
                 Container(
                   padding: const EdgeInsets.symmetric(
                     horizontal: 10,
@@ -248,20 +222,18 @@ class _DiscountBanner extends StatelessWidget {
               ],
             ),
           ),
-          // Right side: Illustration (placeholder)
+          // Right illustration
           Expanded(
             flex: 5,
-            child: Center(
-              // Using an empty container or a simple widget as a placeholder for the food illustration
-              child: Container(
-                // In a real project, this would be an Image.asset or illustration widget
-                decoration: const BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage('assets/images/banner_food.png'),
-                    fit: BoxFit.contain,
-                    // Error builder fallback is crucial here for the placeholder image
-                    alignment: Alignment.centerRight,
-                  ),
+            child: Align(
+              alignment: Alignment.centerRight,
+              child: Image.asset(
+                'assets/images/banner_food.png',
+                fit: BoxFit.contain,
+                errorBuilder: (_, __, ___) => const Icon(
+                  Icons.shopping_bag,
+                  color: Colors.white,
+                  size: 60,
                 ),
               ),
             ),
@@ -272,27 +244,22 @@ class _DiscountBanner extends StatelessWidget {
   }
 }
 
-// --- 4. Category List Widget (Horizontal ScrollView) ---
+// --- 4. Categories ---
 class _CategoryList extends StatelessWidget {
   const _CategoryList();
 
-  // Mock data for categories matching the image
   final List<Map<String, dynamic>> categories = const [
     {'name': 'Fruits', 'icon': Icons.food_bank, 'color': kPrimaryGreen},
     {'name': 'Dairy', 'icon': Icons.set_meal, 'color': Color(0xFFE5A869)},
     {'name': 'Veg', 'icon': Icons.grass, 'color': Color(0xFF90C290)},
     {'name': 'Meat', 'icon': Icons.local_dining, 'color': Color(0xFFC7C7C7)},
-    {
-      'name': 'Grains',
-      'icon': Icons.rice_bowl,
-      'color': Color(0xFF6AA84F),
-    }, // Additional Category
+    {'name': 'Grains', 'icon': Icons.rice_bowl, 'color': Color(0xFF6AA84F)},
   ];
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 100, // Fixed height for horizontal list
+      height: 100,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         itemCount: categories.length,
@@ -305,7 +272,7 @@ class _CategoryList extends StatelessWidget {
               name: category['name'],
               icon: category['icon'],
               color: category['color'],
-              isActive: index == 0, // 'Fruits' is active in the image
+              isActive: index == 0,
             ),
           );
         },
@@ -331,14 +298,11 @@ class _CategoryCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        // Icon Container
         Container(
           width: 65,
           height: 65,
           decoration: BoxDecoration(
-            color: isActive
-                ? kPrimaryGreen
-                : Colors.transparent, // Active card has solid background
+            color: isActive ? kPrimaryGreen : Colors.transparent,
             border: Border.all(
               color: isActive ? kPrimaryGreen : Colors.grey.shade300,
               width: isActive ? 0 : 1.5,
@@ -348,7 +312,6 @@ class _CategoryCard extends StatelessWidget {
           child: Icon(icon, color: isActive ? Colors.white : color, size: 30),
         ),
         const SizedBox(height: 5),
-        // Name Text
         Text(
           name,
           style: TextStyle(
@@ -363,50 +326,51 @@ class _CategoryCard extends StatelessWidget {
   }
 }
 
-// --- 5. Popular Items Grid Widget ---
+// --- 5. Popular Items ---
 class _PopularItemsGrid extends StatelessWidget {
   const _PopularItemsGrid();
 
-  // Mock product data
   final List<Map<String, dynamic>> products = const [
     {'name': 'Apple', 'price': 20.00, 'imageAsset': 'assets/images/apple.png'},
-    {
-      'name': 'Orange',
-      'price': 30.00,
-      'imageAsset': 'assets/images/orange.png',
-    },
-    {
-      'name': 'Banana',
-      'price': 15.00,
-      'imageAsset': 'assets/images/banana.png',
-    },
-    {
-      'name': 'Grapes',
-      'price': 25.00,
-      'imageAsset': 'assets/images/grapes.png',
-    },
+    {'name': 'Orange', 'price': 30.00, 'imageAsset': 'assets/images/orange.png'},
+    {'name': 'Banana', 'price': 15.00, 'imageAsset': 'assets/images/banana.png'},
+    {'name': 'Grapes', 'price': 25.00, 'imageAsset': 'assets/images/grapes.png'},
   ];
 
   @override
   Widget build(BuildContext context) {
-    // Use GridView.builder to create the two-column layout shown in the image
     return GridView.builder(
-      shrinkWrap: true, // Crucial for embedding in a SingleChildScrollView
-      physics:
-          const NeverScrollableScrollPhysics(), // Prevent grid from scrolling
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
       itemCount: products.length,
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2, // Two columns
+        crossAxisCount: 2,
         crossAxisSpacing: 15,
         mainAxisSpacing: 15,
-        childAspectRatio: 0.75, // Adjust height vs width for the card style
+        childAspectRatio: 0.75,
       ),
       itemBuilder: (context, index) {
         final product = products[index];
-        return _ProductCard(
-          name: product['name'],
-          price: product['price'],
-          imageAsset: product['imageAsset'],
+        return GestureDetector(
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => ProductDetailPage(
+                  item: {
+                    'name': product['name'],
+                    'price': product['price'],
+                    'image': product['imageAsset'], // <-- send correct key
+                  },
+                ),
+              ),
+            );
+          },
+          child: _ProductCard(
+            name: product['name'],
+            price: product['price'],
+            imageAsset: product['imageAsset'],
+          ),
         );
       },
     );
@@ -432,17 +396,16 @@ class _ProductCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.withOpacity(0.1),
+            color: Colors.grey.withOpacity(0.15),
             spreadRadius: 1,
-            blurRadius: 5,
-            offset: const Offset(0, 3),
+            blurRadius: 7,
+            offset: const Offset(0, 4),
           ),
         ],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Product Image Area
           Expanded(
             child: Center(
               child: Padding(
@@ -450,18 +413,15 @@ class _ProductCard extends StatelessWidget {
                 child: Image.asset(
                   imageAsset,
                   fit: BoxFit.contain,
-                  // Fallback icon for the placeholder image if the asset isn't found
-                  errorBuilder: (context, error, stackTrace) => Icon(
-                    Icons.rice_bowl, // fruit/food-themed alternative
+                  errorBuilder: (_, __, ___) => Icon(
+                    Icons.fastfood,
                     size: 60,
-                    color: kPrimaryGreen,
+                    color: kPrimaryGreen.withOpacity(0.5),
                   ),
                 ),
               ),
             ),
           ),
-
-          // Product Name
           Padding(
             padding: const EdgeInsets.only(left: 15.0, bottom: 5),
             child: Text(
@@ -474,17 +434,15 @@ class _ProductCard extends StatelessWidget {
               ),
             ),
           ),
-
-          // Product Price
           Padding(
             padding: const EdgeInsets.only(left: 15.0, bottom: 15),
             child: Text(
               '\$${price.toStringAsFixed(2)}',
-              style: TextStyle(
+              style: const TextStyle(
                 fontFamily: 'Poppins',
                 fontWeight: FontWeight.w600,
                 fontSize: 14,
-                color: kPrimaryGreen, // Green price text
+                color: kPrimaryGreen,
               ),
             ),
           ),
