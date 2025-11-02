@@ -158,7 +158,7 @@ class _DiscountBanner extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 150,
+      height: 175,
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
         color: kPrimaryGreen,
@@ -190,12 +190,12 @@ class _DiscountBanner extends StatelessWidget {
                     color: Colors.white,
                   ),
                 ),
-                const SizedBox(height: 5),
+                const SizedBox(height: 6),
                 Text(
                   'Fresh deals every day!',
                   style: TextStyle(
                     fontFamily: 'Poppins',
-                    fontSize: 10,
+                    fontSize: 16,
                     color: Colors.white.withOpacity(0.8),
                   ),
                 ),
