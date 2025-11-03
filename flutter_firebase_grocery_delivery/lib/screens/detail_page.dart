@@ -10,10 +10,7 @@ const Color kLightGrey = Color(0xFFB0BEC5); // For secondary text/icons
 class ProductDetailPage extends StatelessWidget {
   final Map<String, dynamic> item;
 
-  const ProductDetailPage({
-    super.key,
-    required this.item,
-  });
+  const ProductDetailPage({super.key, required this.item});
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +19,8 @@ class ProductDetailPage extends StatelessWidget {
 
     final String productName = item['name'] ?? 'Unknown';
     final String? productAsset = item['image'];
-    final double productPrice = item['price']?.toDouble() ?? 20.00; // Default price
+    final double productPrice =
+        item['price']?.toDouble() ?? 20.00; // Default price
 
     return Scaffold(
       body: Stack(
@@ -34,37 +32,36 @@ class ProductDetailPage extends StatelessWidget {
 
               // 2. Main Content
               SliverList(
-                delegate: SliverChildListDelegate(
-                  [
-                    // Product Info Block
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                      child: _ProductInfoBlock(productName: productName),
+                delegate: SliverChildListDelegate([
+                  // Product Info Block
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                    child: _ProductInfoBlock(productName: productName),
+                  ),
+
+                  const SizedBox(height: 10),
+
+                  // Quantity Selector (centered)
+                  const Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 25.0),
+                    child: Center(child: _QuantitySelector()),
+                  ),
+
+                  const SizedBox(height: 30),
+
+                  // Product Description
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                    child: _ProductDescription(
+                      description:
+                          item['description'] ??
+                          'Freshly sourced ${productName.toLowerCase()}s, packed with nutrition and perfect for your daily needs.',
                     ),
+                  ),
 
-                    const SizedBox(height: 10),
-
-                    // Quantity Selector (centered)
-                    const Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 25.0),
-                      child: Center(child: _QuantitySelector()),
-                    ),
-
-                    const SizedBox(height: 30),
-
-                    // Product Description
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                      child: _ProductDescription(
-                        description: item['description'] ??
-                            'Freshly sourced ${productName.toLowerCase()}s, packed with nutrition and perfect for your daily needs.',
-                      ),
-                    ),
-                    
-                    // Spacer to ensure content scrolls above the fixed footer
-                    const SizedBox(height: 120), 
-                  ],
-                ),
+                  // Spacer to ensure content scrolls above the fixed footer
+                  const SizedBox(height: 120),
+                ]),
               ),
             ],
           ),
@@ -141,7 +138,6 @@ class _PlaceholderImage extends StatelessWidget {
     );
   }
 }
-
 
 // --- 2. Product Info Block (Unchanged) ---
 class _ProductInfoBlock extends StatelessWidget {
@@ -231,7 +227,11 @@ class _QuantitySelectorState extends State<_QuantitySelector> {
   }
 
   // Helper method for the buttons
-  Widget _buildButton(IconData icon, VoidCallback onPressed, {bool isMinus = false}) {
+  Widget _buildButton(
+    IconData icon,
+    VoidCallback onPressed, {
+    bool isMinus = false,
+  }) {
     return InkWell(
       onTap: onPressed,
       borderRadius: BorderRadius.circular(12),
@@ -279,7 +279,6 @@ class _QuantitySelectorState extends State<_QuantitySelector> {
   }
 }
 
-
 // --- 4. Product Description (Unchanged) ---
 class _ProductDescription extends StatelessWidget {
   final String description;
@@ -314,7 +313,6 @@ class _ProductDescription extends StatelessWidget {
     );
   }
 }
-
 
 // --- 5. Add to Cart Footer (Modern Floating UI/UX) ---
 class _AddToCartFooter extends StatefulWidget {
@@ -357,7 +355,6 @@ class _AddToCartFooterState extends State<_AddToCartFooter> {
         child: Row(
           children: [
             // Quantity Selector
-
             const SizedBox(width: 15),
 
             // Price Display
@@ -366,7 +363,10 @@ class _AddToCartFooterState extends State<_AddToCartFooter> {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(15),
                 gradient: LinearGradient(
-                  colors: [kPrimaryGreen.withOpacity(0.2), kPrimaryGreen.withOpacity(0.1)],
+                  colors: [
+                    kPrimaryGreen.withOpacity(0.2),
+                    kPrimaryGreen.withOpacity(0.1),
+                  ],
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                 ),
@@ -401,7 +401,10 @@ class _AddToCartFooterState extends State<_AddToCartFooter> {
                       ),
                     );
                   },
-                  icon: const Icon(Icons.shopping_cart_outlined, color: Colors.white),
+                  icon: const Icon(
+                    Icons.shopping_cart_outlined,
+                    color: Colors.white,
+                  ),
                   label: const Text(
                     'Add to Cart',
                     style: TextStyle(

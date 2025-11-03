@@ -332,9 +332,21 @@ class _PopularItemsGrid extends StatelessWidget {
 
   final List<Map<String, dynamic>> products = const [
     {'name': 'Apple', 'price': 20.00, 'imageAsset': 'assets/images/apple.png'},
-    {'name': 'Orange', 'price': 30.00, 'imageAsset': 'assets/images/orange.png'},
-    {'name': 'Banana', 'price': 15.00, 'imageAsset': 'assets/images/banana.png'},
-    {'name': 'Grapes', 'price': 25.00, 'imageAsset': 'assets/images/grapes.png'},
+    {
+      'name': 'Orange',
+      'price': 30.00,
+      'imageAsset': 'assets/images/orange.png',
+    },
+    {
+      'name': 'Banana',
+      'price': 15.00,
+      'imageAsset': 'assets/images/banana.png',
+    },
+    {
+      'name': 'Grapes',
+      'price': 25.00,
+      'imageAsset': 'assets/images/grapes.png',
+    },
   ];
 
   @override

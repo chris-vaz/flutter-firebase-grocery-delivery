@@ -122,9 +122,7 @@ class OnboardingScreen extends StatelessWidget {
             // Navigate to HomeScreen and replace onboarding
             Navigator.pushReplacement(
               context,
-              MaterialPageRoute(
-                builder: (context) => const HomeScreen(),
-              ),
+              MaterialPageRoute(builder: (context) => const HomeScreen()),
             );
           },
           style: ElevatedButton.styleFrom(
